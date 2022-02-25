@@ -1,0 +1,53 @@
+# with open("weather_data.csv",mode="r") as File:
+#     data = File.readline()
+#
+# print(data)
+
+# import csv
+#
+# with open("weather_data.csv") as file:
+#     data = csv.reader(file)
+#     temperature = []
+#     for row in data:
+#         if row[1]!="temp":
+#             temperature.append(int(row[1]))
+#     print(temperature)
+
+# data = pandas.read_csv("weather_data.csv")
+# temp_list = data["temp"].to_list()
+# sum = 0
+# nr = 0
+# for temp in temp_list:
+#     sum+=temp
+#     nr+=1
+#
+# avgTemp=sum/nr
+# print(avgTemp)
+#
+# monday = data[data.day == "Monday"]
+# print(f"Monday temperature in Fahrenheit is {int(monday.temp)*1.8+32}")
+
+
+###################################______________PROGRAM 2______#################################################################
+import pandas
+
+sqData = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
+sqColor = sqData["Primary Fur Color"]
+sqColorList = sqColor.to_list()
+grNum=0
+cinNum=0
+blNum=0
+for color in sqColorList:
+    if color == "Gray":
+        grNum+=1
+    elif color=="Cinnamon":
+        cinNum+=1
+    elif color=="Black":
+        blNum+=1
+
+sqDict={
+    "Color":["Gray","Cinnamon","Black"],
+    "Count":[grNum,cinNum,blNum]
+}
+newSqData = pandas.DataFrame(sqDict)
+newSqData.to_csv("new_data.csv")
