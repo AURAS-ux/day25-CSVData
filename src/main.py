@@ -17,7 +17,6 @@ writer.hideturtle()
 gameON = True
 correct_guesses = 0
 correct_states = []
-missed_states=[]
 while gameON:
     answer_state = (
         screen.textinput(title=f"{correct_guesses}/50  Guess the state", prompt="Guess the next state")).lower()
@@ -34,10 +33,8 @@ while gameON:
             gameON = False
         if answer_state.lower() == "exit":
             gameON = False
-            if stateList[i] not in correct_states:
-                missed_states.append(stateList[i])
-                missed_states_dic={
-                    "States":missed_states,
-                }
-                (pandas.DataFrame(missed_states_dic)).to_csv("Assets/missed_states.csv")
+            missed_states = [state for state in stateList if state not in correct_states]
+            (pandas.DataFrame({
+                "States":missed_states,
+            })).to_csv("Assets/missed_states.csv")
 screen.exitonclick()
